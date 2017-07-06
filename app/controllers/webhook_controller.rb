@@ -17,7 +17,7 @@ class WebhookController < ApplicationController
     user_words = event["message"]["text"]
     
    if user_words == "テスト" then
-      @post = RamPost.find(params[:words])
+      @post = RamPost.find(1)
       ram_text = @post
     
    else
