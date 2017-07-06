@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Ram Posts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Words</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @ram_posts.each do |ram_post| %>
+      <tr>
+        <td><%= ram_post.words %></td>
+        <td><%= link_to 'Show', ram_post %></td>
+        <td><%= link_to 'Edit', edit_ram_post_path(ram_post) %></td>
+        <td><%= link_to 'Destroy', ram_post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Ram post', new_ram_post_path %>

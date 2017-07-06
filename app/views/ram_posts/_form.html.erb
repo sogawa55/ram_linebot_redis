@@ -1,0 +1,21 @@
+<%= form_for(@ram_post) do |f| %>
+  <% if @ram_post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@ram_post.errors.count, "error") %> prohibited this ram_post from being saved:</h2>
+
+      <ul>
+      <% @ram_post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :words %><br>
+    <%= f.text_area :words %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

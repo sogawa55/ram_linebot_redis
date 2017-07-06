@@ -1,0 +1,1 @@
+json.partial! "ram_posts/ram_post", ram_post: @ram_post
