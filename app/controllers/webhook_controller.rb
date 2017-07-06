@@ -29,6 +29,16 @@ class WebhookController < ApplicationController
       hate_words = ["ダーリンが浮気さえしなければかんしゃくなんかおこさないっちゃっ！","浮気はゆるさないっちゃ!!","うちは、ダーリンの妻だっちゃ!!"]
       index = rand(0..2)
       ram_text = hate_words[index]
+      
+    elsif user_words == "ピカチュウ"
+      pika_words = ["ぴ、ぴかちゅう～","10万ボルトだちゃ★","ぴかーーーだっちゃ★"] 
+      index = rand(0..2)
+      ram_text = pika_words[index]
+    elsif user_words == "エネル"
+      eneru_words = ["エルトール!神の裁きだっちゃ!!(ドーン...)","1億ボルトヴァーリーだっちゃ!!(ビリビリビリビリ....)","さぁ一緒にフェアリーバースへ行くだっちゃ"]
+      index = rand(0..2)
+      ram_text = eneru_words[index]
+      
     else
     docomo_client = DocomoClient.new(api_key: ENV["DOCOMO_API_KEY"])
     
