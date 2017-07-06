@@ -18,7 +18,7 @@ class WebhookController < ApplicationController
     ram_text  = ""
     
     if user_words =~ /好き|すき|結婚|可愛い|かわいい|綺麗|キレイ|美しい|キス|愛|あい|美人/ then 
-      index = rand(1..10)
+      index = rand(1..11)
       ram_post = RamPost.find(index)
       ram_text = ram_post.words
     
@@ -26,7 +26,7 @@ class WebhookController < ApplicationController
       ram_text = "うち、ラムだっちゃ!!"
       
     elsif user_words =~ /浮気|女/ then
-      hate_words = ["ダーリンが浮気さえしなければかんしゃくなんかおこさないっちゃっ！","浮気はゆるさないっちゃ!!","うちは、ダーリンの妻だっちゃ!!"]
+      hate_words = ["マジメな顔してどーせ女のこと考えてるっちゃ！","浮気はゆるさないっちゃ!!","ダーリンが浮気さえしなければかんしゃくなんかおこさないっちゃっ！"]
       index = rand(0..2)
       ram_text = hate_words[index]
       
