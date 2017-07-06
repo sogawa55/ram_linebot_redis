@@ -16,9 +16,17 @@ class WebhookController < ApplicationController
     replyToken = event["replyToken"]
     user_words = event["message"]["text"]
     
-   if user_words == "テスト" then
-      @post = RamPost.find(1)
+   if user_words =~ /好き||大好き||結婚||可愛い||かわいい||美しい||愛||キレイ||綺麗||キス||すき/ then
+      @post = RamPost.offset(rand(RamPost.count)).first
       ram_text = @post.words
+    
+   elsif user_words =~ /名前||自己紹介||なまえ/ then
+      ram_text = "うち、ラムだっちゃ!!"
+    
+   elsif user_words =~ /浮気||女/ then
+     hate_words = ["ダーリンが浮気さえしなければかんしゃくなんかおこさないっちゃっ！","浮気はゆるさないっちゃ!!","うちは、ダーリンの妻だっちゃ!!"]
+     index = rand(0..2)
+     ram_text = hate_words[index]
     
    else
     docomo_client = DocomoClient.new(api_key: ENV["DOCOMO_API_KEY"])
@@ -36,7 +44,7 @@ class WebhookController < ApplicationController
      
     output_text = message.to_s
     mark = ["☆","★","♪"]  
-    x= rand(0..4)
+    x = rand(0..4)
     gobi = ["だっちゃ","っちゃ"]
     y = rand(0..1)
     modified_text1 = output_text.gsub(/私/, "うち")
