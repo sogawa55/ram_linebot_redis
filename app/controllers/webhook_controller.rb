@@ -18,7 +18,8 @@ class WebhookController < ApplicationController
     ram_text  = ""
     
    if user_words == "好き"||"大好き"||"結婚"||"可愛い"||"かわいい"||"美しい"||"愛"||"キレイ"||"綺麗"||"キス"||"すき" then
-      ram_post = RamPost.offset(rand(RamPost.count)).first
+      index = rand(0..8)
+      ram_post = RamPost.find(index)
       ram_text = ram_post.words
     
    else
