@@ -18,7 +18,7 @@ class WebhookController < ApplicationController
     
    if user_words == "テスト" then
       @post = RamPost.find(1)
-      ram_text = @post
+      ram_text = @post.words
     
    else
     docomo_client = DocomoClient.new(api_key: ENV["DOCOMO_API_KEY"])
