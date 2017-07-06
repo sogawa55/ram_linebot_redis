@@ -1,6 +1,6 @@
 == README
 
-![ラム](/docs/ram.png)
+![ラム](http://imgur.com/a/U5zSC)
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
