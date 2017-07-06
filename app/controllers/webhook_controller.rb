@@ -17,7 +17,7 @@ class WebhookController < ApplicationController
     user_words = event["message"]["text"]
     ram_text  = ""
     
-    if user_words == "好き" then 
+    if user_words =~ /好き||すき/ then 
       index = rand(0..8)
       ram_post = RamPost.find(index)
       ram_text = ram_post.words
