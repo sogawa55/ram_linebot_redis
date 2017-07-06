@@ -1,7 +1,5 @@
 == README
 
-![ram](https://user-images.githubusercontent.com/26180642/27902521-06405dd6-6271-11e7-8e76-b83e36808474.png)
-
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
