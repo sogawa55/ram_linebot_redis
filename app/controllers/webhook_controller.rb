@@ -17,7 +17,12 @@ class WebhookController < ApplicationController
     user_words = event["message"]["text"]
     ram_text  = ""
     
-
+    if user_words == "好き" then 
+      index = rand(0..8)
+      ram_post = RamPost.find(index)
+      ram_text = ram_post.words
+      
+    else
     docomo_client = DocomoClient.new(api_key: ENV["DOCOMO_API_KEY"])
     
     from = response.body["context"]
@@ -28,9 +33,7 @@ class WebhookController < ApplicationController
     context = $redis.set('user_id', response.body["context"])
     lastmode = $redis.set('mode', response.body["mode"])
     
-   
     message = response.body['utt'] 
-     
     output_text = message.to_s
     mark = ["☆","★","♪"]  
     x = rand(0..4)
@@ -39,6 +42,7 @@ class WebhookController < ApplicationController
     modified_text1 = output_text.gsub(/私/, "うち")
     modified_text2 = modified_text1.gsub(/。|です|ですよ|でした|だね|よね|？/,"")
     ram_text = modified_text2 + gobi[y].to_s + mark[x].to_s
+    end
     
     client = LineClient.new(CHANNEL_ACCESS_TOKEN, OUTBOUND_PROXY)
     res = client.reply(replyToken, ram_text)
