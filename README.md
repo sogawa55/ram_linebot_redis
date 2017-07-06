@@ -6,6 +6,8 @@
      `-----'`--' `---'  `----'  `---'  `--'    `--'`-------' `------'
     ----------------------------------------------------------------- 
 
+<img src="https://user-images.githubusercontent.com/26180642/27902521-06405dd6-6271-11e7-8e76-b83e36808474.png" width="320px">
+
 ![ram](https://user-images.githubusercontent.com/26180642/27902521-06405dd6-6271-11e7-8e76-b83e36808474.png)
 
 Welcome to your Rails project on Cloud9 IDE!
