@@ -21,14 +21,6 @@ class WebhookController < ApplicationController
       ram_post = RamPost.offset(rand(RamPost.count)).first
       ram_text = ram_post.words
     
-   elsif (/名前||自己紹介||なまえ/ =~ user_words) then
-      ram_text = "うち、ラムだっちゃ!!"
-    
-   elsif (/浮気||女/ =~ user_words) then
-     hate_words = ["ダーリンが浮気さえしなければかんしゃくなんかおこさないっちゃっ！","浮気はゆるさないっちゃ!!","うちは、ダーリンの妻だっちゃ!!"]
-     index = rand(0..2)
-     ram_text = hate_words[index]
-    
    else
     docomo_client = DocomoClient.new(api_key: ENV["DOCOMO_API_KEY"])
     
