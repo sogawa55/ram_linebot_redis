@@ -17,12 +17,7 @@ class WebhookController < ApplicationController
     user_words = event["message"]["text"]
     ram_text  = ""
     
-   if user_words == "好き"||"大好き"||"結婚"||"可愛い"||"かわいい"||"美しい"||"愛"||"キレイ"||"綺麗"||"キス"||"すき" then
-      index = rand(0..8)
-      ram_post = RamPost.find(index)
-      ram_text = ram_post.words
-    
-   else
+
     docomo_client = DocomoClient.new(api_key: ENV["DOCOMO_API_KEY"])
     
     from = response.body["context"]
