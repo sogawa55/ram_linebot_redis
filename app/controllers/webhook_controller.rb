@@ -17,14 +17,14 @@ class WebhookController < ApplicationController
     user_words = event["message"]["text"]
     ram_text  = ""
     
-   if /好き||大好き||結婚||可愛い||かわいい||美しい||愛||キレイ||綺麗||キス||すき/ =~ user_words then
+   if (/好き||大好き||結婚||可愛い||かわいい||美しい||愛||キレイ||綺麗||キス||すき/ =~ user_words).nil! then
       ram_post = RamPost.offset(rand(RamPost.count)).first
       ram_text = ram_post.words
     
-   elsif /名前||自己紹介||なまえ/ =~ user_words then
+   elsif (/名前||自己紹介||なまえ/ =~ user_words).nil! then
       ram_text = "うち、ラムだっちゃ!!"
     
-   elsif /浮気||女/ =~ user_words then
+   elsif (/浮気||女/ =~ user_words).nil! then
      hate_words = ["ダーリンが浮気さえしなければかんしゃくなんかおこさないっちゃっ！","浮気はゆるさないっちゃ!!","うちは、ダーリンの妻だっちゃ!!"]
      index = rand(0..2)
      ram_text = hate_words[index]
