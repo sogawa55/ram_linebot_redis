@@ -17,11 +17,18 @@ class WebhookController < ApplicationController
     user_words = event["message"]["text"]
     ram_text  = ""
     
-    if user_words =~ /好き|すき/ then 
-      index = rand(0..8)
+    if user_words =~ /好き|すき|結婚|可愛い|かわいい|綺麗|キレイ|美しい|キス|愛|あい|美人/ then 
+      index = rand(0..7)
       ram_post = RamPost.find(index)
       ram_text = ram_post.words
+    
+    elsif user_words =~ /名前|自己紹介|なまえ/ then
+      ram_text = "うち、ラムだっちゃ!!"
       
+    elsif user_words =~ /浮気|女/ then
+      hate_words = ["ダーリンが浮気さえしなければかんしゃくなんかおこさないっちゃっ！","浮気はゆるさないっちゃ!!","うちは、ダーリンの妻だっちゃ!!"]
+      index = rand(0..2)
+      ram_text = hate_words[index]
     else
     docomo_client = DocomoClient.new(api_key: ENV["DOCOMO_API_KEY"])
     
