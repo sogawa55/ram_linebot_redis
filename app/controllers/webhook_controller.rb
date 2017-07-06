@@ -18,8 +18,8 @@ class WebhookController < ApplicationController
     ram_text  = ""
     
    if /好き||大好き||結婚||可愛い||かわいい||美しい||愛||キレイ||綺麗||キス||すき/ =~ user_words then
-      @post = RamPost.offset(rand(RamPost.count)).first
-      ram_text = @post.words
+      ram_post = RamPost.offset(rand(RamPost.count)).first
+      ram_text = ram_post.words
     
    elsif /名前||自己紹介||なまえ/ =~ user_words then
       ram_text = "うち、ラムだっちゃ!!"
