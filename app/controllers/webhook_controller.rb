@@ -14,15 +14,20 @@ class WebhookController < ApplicationController
     
     event = params["events"][0]
     replyToken = event["replyToken"]
-    user_text = event["message"]["text"]
-  
-     docomo_client = DocomoClient.new(api_key: ENV["DOCOMO_API_KEY"])
+    user_words = event["message"]["text"]
+    
+   if user_words == "好き" then
+      @post = RamPost.offset( rand(RamPost.count) ).first
+      @post = $ram_text
+    
+   else
+    docomo_client = DocomoClient.new(api_key: ENV["DOCOMO_API_KEY"])
     
     from = response.body["context"]
     mode = response.body["mode"]
     context = $redis.set('user_id', from)
     lastmode = $redis.set('mode', mode)
-    response =  docomo_client.chat(user_text, mode, context)
+    response =  docomo_client.chat(user_words, mode, context)
     context = $redis.set('user_id', response.body["context"])
     lastmode = $redis.set('mode', response.body["mode"])
     
@@ -36,10 +41,11 @@ class WebhookController < ApplicationController
     y = rand(0..1)
     modified_text1 = output_text.gsub(/私/, "うち")
     modified_text2 = modified_text1.gsub(/。|です|ですよ|でした|だね|よね|？/,"")
-    ram_text = modified_text2 + gobi[y].to_s + mark[x].to_s
-
+    $ram_text = modified_text2 + gobi[y].to_s + mark[x].to_s
+   end
+    
     client = LineClient.new(CHANNEL_ACCESS_TOKEN, OUTBOUND_PROXY)
-    res = client.reply(replyToken, ram_text)
+    res = client.reply(replyToken, $ram_text)
 
     if res.status == 200
       logger.info({success: res})

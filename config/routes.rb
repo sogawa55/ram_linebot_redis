@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :ram_posts
   post '/callback' => 'webhook#callback'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
