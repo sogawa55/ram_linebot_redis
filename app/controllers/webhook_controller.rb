@@ -18,7 +18,8 @@ class WebhookController < ApplicationController
     
    if user_words == "テスト" then
       @post = RamPost.offset(rand(RamPost.count)).first
-      ram_text　= "テスト"
+      abc = "テスト"
+      ram_text = abc
     
    else
     docomo_client = DocomoClient.new(api_key: ENV["DOCOMO_API_KEY"])
