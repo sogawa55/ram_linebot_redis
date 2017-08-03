@@ -6,7 +6,6 @@ class DocomoClient
   end
   
   def chat(message, mode=nil,context=nil)
-    #Docomoruクライアントのインスタンスを生成
     client = Docomoru::Client.new(api_key: ENV["DOCOMO_API_KEY"])
     #Docomoruのcreate_daialogueメソッドを実行して返答内容取得
     response = client.create_dialogue(message, { 'mode':mode, 'context':context, 'sex':"男", 'bloodtype':"B" })

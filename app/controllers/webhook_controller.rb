@@ -1,22 +1,20 @@
 class WebhookController < ApplicationController
   # Lineからのcallbackか認証
   protect_from_forgery with: :null_session
-  #環境変数の設定
+  
   CHANNEL_SECRET = ENV['CHANNEL_SECRET']
   OUTBOUND_PROXY = ENV['OUTBOUND_PROXY']
   CHANNEL_ACCESS_TOKEN = ENV['CHANNEL_ACCESS_TOKEN']
-　#メッセージが送信されるとcallback関数が実行される
+  
+　#メッセージ送信に応じてcallback変数実行
   def callback
     unless is_validate_signature
     　#エラーがあれば何も表示しない
       render :nothing => true, status: 470
     end
     
-    #リクエストのタイプを取得
     event = params["events"][0]
-    #リクエストに含まれるreplyTokenを格納
     replyToken = event["replyToken"]
-    #ユーザーのメッセージ内容を格納
     user_words = event["message"]["text"]
     ram_text  = ""
     
@@ -39,24 +37,20 @@ class WebhookController < ApplicationController
       index = rand(0..1)
       ram_text = pika_words[index]
     else
-    #環境変数に格納したAPIキーを引数にDocomoClientをインスタンス化
+  
     docomo_client = DocomoClient.new(api_key: ENV["DOCOMO_API_KEY"])
     
-    #前回のコンテクストを取り出し格納
+
     from = response.body["context"]
-    #前回の会話モードを取り出し格納
     mode = response.body["mode"]
-    #Redisにキーとセットでコンテクストを格納
+    #Redisにキーとセットで値を保存
     context = $redis.set('user_id', from)
-    #Redisにキーとセットで会話モードを格納
     lastmode = $redis.set('mode', mode)
-    #ユーザーのメッセージとRedisに保存したmode,contextを引数にして返答データを取得
     response =  docomo_client.chat(user_words, lastmode, context)
     #取得した返答データに含まれるcontextとmodeの値をRedisに保存
     context = $redis.set('user_id', response.body["context"])
     lastmode = $redis.set('mode', response.body["mode"])
     
-    #返答メッセージを格納
     message = response.body['utt'] 
     output_text = message.to_s
     mark = ["☆","★","♪"]  
@@ -69,9 +63,8 @@ class WebhookController < ApplicationController
     ram_text = modified_text2 + gobi[y].to_s + mark[x].to_s
     end
     
-    #LINEクライアントのインスタンス化
+    
     client = LineClient.new(CHANNEL_ACCESS_TOKEN, OUTBOUND_PROXY)
-    #返答メッセージを引数にreplyメソッドを実行
     res = client.reply(replyToken, ram_text)
     
     #replyメソッドのステータスチェック
