@@ -14,7 +14,7 @@
 ## 使用技術
 * ruby 2.3
 * ruby on rails 4.2.5
-* Pass：heroku
+* Paas：heroku
 * db：Postgresql
 * lib：docomoru、Redis、faraday
 * LINE Messaging API
